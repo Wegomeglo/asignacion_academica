@@ -60,7 +60,7 @@ public class Menu implements Serializable {
             model.addElement(submenu);
         }
 
-        submenu = new DefaultSubMenu("Administración");
+        submenu = new DefaultSubMenu("Programación   Actual");
 
         if ("1".equals(perfil)
                 || "2".equals(perfil)
@@ -74,9 +74,9 @@ public class Menu implements Serializable {
 
         //*******************************************************************
         if ("1".equals(perfil)) {
-            submenu = new DefaultSubMenu("Historicos");
-            submenu.addElement(crearItem("Reportes Historicos", "/secretario/reportes.xhtml"));
-            submenu.addElement(crearItem("Historicos Salones", "/secretario/reportes.xhtml"));
+            submenu = new DefaultSubMenu("Programación Históricos");
+            submenu.addElement(crearItem("Reportes Historicos", "/secretario/reportesHistoricos.xhtml"));
+            submenu.addElement(crearItem("Historicos Programación", "/administrador/historicoProgramacion.xhtml"));
             model.addElement(submenu);
         }
         //*******************************************************************
