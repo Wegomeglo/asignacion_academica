@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:messages id="messages" showDetail="true"/>
+        <p:panel id="panel">
+            <h:panelGrid columns="6" cellpadding="10">  
+                <p:outputLabel for="perfil" value="Perfil"/>
+                <p:selectOneMenu id="perfil" style="width: 100%"
+                                 value="#{perfilesController.selected}"
+                                 required="true">
+                    <p:ajax event="change" update="panel" process="perfil" />
+                    <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                    <f:selectItems value="#{usuariosController.consultaPerfiles}" var="perfiles" itemLabel="#{perfiles.descripcionPerfil}" itemValue="#{perfiles}"/>
+                </p:selectOneMenu>
+                <p:message for="perfil" />
+                <p:outputLabel for="plan" value="Plan" rendered="#{perfilesController.selected.codigoPerfil==3}"/>
+                <p:selectOneMenu id="plan" style="width: 100%"
+                                 value="#{planesController.selected}"
+                                 required="true"
+                                 rendered="#{perfilesController.selected.codigoPerfil==3}">
+                    <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                    <f:selectItems value="#{planesController.consultaTabla}" var="plan" itemLabel="#{plan.descripcionPlan}" itemValue="#{plan}"/>
+                </p:selectOneMenu>
+                <p:message for="perfil" rendered="#{perfilesController.selected.codigoPerfil==3}"/>
+                <p:outputLabel for="login" value="Login"/>
+                <p:inputText id="login" style="width: 100%"
+                             value="#{usuariosController.selected.loginUsuario}" required="true">
+                    <f:validator validatorId="numeros"/>
+                </p:inputText>
+                <p:message for="login" />
+                <p:outputLabel for="nombre" value="Nombres"/>
+                <p:inputText id="nombre" style="width: 100%"
+                             value="#{usuariosController.selected.nombreUsuario}" required="true">
+                    <f:validator validatorId="letras"/>
+                </p:inputText>
+                <p:message for="nombre" />
+                <p:outputLabel for="apellido" value="Apellidos"/>
+                <p:inputText id="apellido" style="width: 100%"
+                             value="#{usuariosController.selected.apellidoUsuario}" required="true">
+                    <f:validator validatorId="letras"/>
+                </p:inputText>
+                <p:message for="apellido" />
+                <p:outputLabel for="ciudad" value="Ciudad"/>
+                <p:selectOneMenu id="ciudad" style="width: 100%"
+                                 value="#{ciudadesController.selected}"
+                                 required="true" filter="true"
+                                 filterMatchMode="contains">
+                    <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                    <f:selectItems value="#{ciudadesController.consultaTabla}" var="ciudad" itemLabel="#{ciudad.nombreCiudad} - #{ciudad.idDepartamento.nombreDepartamento}" itemValue="#{ciudad}"/>
+                </p:selectOneMenu>
+                <p:message for="ciudad" />
+                <p:outputLabel for="email" value="E-mail"/>
+                <p:inputText id="email" style="width: 100%"
+                             value="#{usuariosController.selected.emailUsuario}" required="true">
+                    <f:validator validatorId="email"/>
+                </p:inputText>
+                <p:message for="email" />
+                <p:outputLabel for="tel" value="Teléfono"/>
+                <p:inputText id="tel" style="width: 100%"
+                             value="#{usuariosController.selected.telefonoUsuario}" required="true">
+                    <f:validator validatorId="numeros"/>
+                </p:inputText>
+                <p:message for="tel" />
+            </h:panelGrid>
+            <c:choose>
+                
+                
+                <c:when test="#{usuariosController.selected.loginUsuario==null}">
+                    <p:commandButton value="Grabar Usuario" 
+                                     actionListener="#{usuariosController.create()}"
+                                     process="panel" update=":tabview"
+                                     oncomplete="funcion();" onsuccess="tabla.clearFilters();"/>
+                </c:when>
+                
+                <!-- Creacion de Tabla -->
+                <c:otherwise>
+                    <p:commandButton value="Actualizar Usuario" 
+                                     actionListener="#{usuariosController.update()}" 
+                                     process="panel" update=":tabview"
+                                     oncomplete="funcion();limpiar();" onsuccess="tabla.clearFilters();"/>
+                    <p:commandButton value="Cancelar Actualizacion" 
+                                     actionListener="#{indexLoader.limpiarCruds()}" 
+                                     process="@this" update=":tabview" oncomplete="funcion();" 
+                                     onsuccess="tabla.clearFilters();limpiar();"/>
+                </c:otherwise>
+            </c:choose>
+            <p:remoteCommand name="funcion" process="@this" 
+                             onstart="tabla.clearFilters();"/>
+        </p:panel>
+    </cc:implementation>
+</html>

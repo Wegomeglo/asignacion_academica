@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="resources/ezcomp/formulariotipoaula.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="administrador/registrousuarios.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="resources/ezcomp/formulariosedes.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="resources/ezcomp/formularioaulas.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="resources/ezcomp/sesion.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="administrador/registromodalidades.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="secretario/reportes.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="administrador/registroaulas.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="administrador/optimizacion.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="resources/ezcomp/formulariohojavida.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="resources/ezcomp/formulariousuarios.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="resources/ezcomp/formularioplanes.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="administrador/registroasignaturas.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="resources/ezcomp/accesodenegado.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="administrador/registrosedes.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="administrador/registrotipoaula.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="templates/template.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="resources/ezcomp/datatable.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="docente/hojavida.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="index.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="resources/ezcomp/formularioasignaturas.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="docente/horariodocente.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="resources/ezcomp/formulariomodalidades.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="administrador/horarioaulas.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="*" x="400" y="600" zoom="true"/>
+        <Node id="resources/ezcomp/login.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="templates/crud.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="coordinador/registrohorario.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="resources/ezcomp/formularioDatosAcademicos.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="administrador/registroplanes.xhtml" x="650" y="300" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

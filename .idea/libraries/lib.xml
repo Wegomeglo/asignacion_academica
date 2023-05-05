@@ -1,0 +1,26 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-schemas-3.7-20101029.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/primefaces-4.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/itext-2.1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.faces.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-3.7-20101029.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jstl-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-3.7-20101029.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-examples-3.7-20101029.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/eclipselink.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jstl-impl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.persistence_2.1.0.v201304241213.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-scratchpad-3.7-20101029.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.23-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/all-themes-1.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/primefaces-4.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/primefaces-4.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

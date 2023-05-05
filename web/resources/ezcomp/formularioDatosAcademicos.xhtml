@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:messages id="messages" showDetail="true"/>
+        <p:panel id="panel" header="Datos Académicos">
+            <h:panelGrid columns="6" cellpadding="10">  
+
+                <h:outputLabel for="nivelacademico" value="Nivel académico:" />
+                <p:inputText id="nivel" style="width: 100%"
+                             value="#{infoAcadeController.selected.nivelAcademico}" required="true">
+                    <f:validator validatorId="letras"/>
+                </p:inputText>
+                <p:message for="nivel" />
+
+                <h:outputLabel for="titulo" value="Titulo obtenido:" />
+                <p:inputText id="titulo" style="width: 100%"
+                             value="#{infoAcadeController.selected.tituloAcademico}" required="true">
+                    <f:validator validatorId="letras"/>
+                </p:inputText>
+                <p:message for="titulo" />
+
+                <h:outputLabel for="inicio" value="Fecha inicial:" />
+                <p:inputText id="inicial" style="width: 100%"
+                             value="#{infoAcadeController.selected.fechaInicio}" required="true">
+                    <f:validator validatorId="letras"/>
+                </p:inputText>
+                <p:message for="inicial" />
+
+                <h:outputLabel for="fechafinal" value="Fecha final:" />
+                <p:inputText id="final" style="width: 100%"
+                             value="#{infoAcadeController.selected.fechaFinal}" required="true">
+                    <f:validator validatorId="letras"/>
+                </p:inputText>
+                <p:message for="final" />
+
+                <h:outputLabel for="institucion" value="Institucion:" />
+                <p:inputText id="institucion" style="width: 100%"
+                             value="#{infoAcadeController.selected.institucion}" required="true">
+                    <f:validator validatorId="letras"/>
+                </p:inputText>
+                <p:message for="institucion" />
+
+                <!--<h:outputLabel for="diploma" value="Diploma (PDF):" />
+                <p:fileUpload id="diploma" value="#{bean.diploma}" mode="advanced" auto="true"
+                              fileUploadListener="#{bean.handleFileUpload}" allowTypes="/(\.|\/)(pdf)$/" />-->   
+            </h:panelGrid>
+
+
+            <c:choose>
+
+
+                <c:when test="#{infoAcadeController.selected.institucion==null}">
+                    <p:commandButton value="Agregar" 
+                                     actionListener="#{infoAcadeController.create()}" 
+                                     process="panel" update=":tabview"
+                                     oncomplete="funcion();limpiar();" onsuccess="tabla.clearFilters();"/>
+                </c:when>
+
+                <!-- Creacion de Tabla -->
+                <c:otherwise>
+                    <p:commandButton value="Actualizar Información" 
+                                     actionListener="#{infoAcadeController.update()}" 
+                                     process="panel" update=":tabview"
+                                     oncomplete="funcion();limpiar();" onsuccess="tabla.clearFilters();"/>
+                    <p:commandButton value="Cancelar Actualización" 
+                                     actionListener="#{indexLoader.limpiarCruds()}" 
+                                     process="@this" update=":tabview" oncomplete="funcion();" 
+                                     onsuccess="tabla.clearFilters();limpiar();"/>
+                </c:otherwise>
+            </c:choose>
+            <p:remoteCommand name="funcion" process="@this" 
+                             onstart="tabla.clearFilters();"/>
+        </p:panel>
+    </cc:implementation>
+</html>

@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="title">
+                Registro de Horarios:SAD
+            </ui:define>
+
+            <ui:define name="onload">
+                <script language="JavaScript" type="text/JavaScript">
+                    function bodyLoaded(){
+                    reset();
+                    }
+                </script>
+            </ui:define>
+
+            <ui:define name="migas">
+                <p:menuitem styleClass="migas" value="Registro de Informacion" url="#"/>
+                <p:menuitem styleClass="migas" value="Registro de Horarios" url="#"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <p:panel id="panel" header="Control de Horarios">
+                        <h:panelGrid id="preseleccion" columns="2">
+                            <p:outputLabel for="plan" value="Plan" rendered="#{usuariosController.usuario.codigoPerfil.codigoPerfil!=3}"/>
+                            <p:selectOneMenu id="plan"
+                                             value="#{planesController.selected}"
+                                             required="true"
+                                             rendered="#{usuariosController.usuario.codigoPerfil.codigoPerfil!=3}">
+                                <p:ajax event="change" update="panel" listener="#{horariosController.cargarEventos()}"/>
+                                <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                                <f:selectItems value="#{planesController.consultaTabla}" var="plan" itemLabel="#{plan.descripcionPlan}" itemValue="#{plan}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="cohorte" value="Cohorte"/>
+                            <p:selectOneMenu id="cohorte"
+                                             value="#{horariosController.selected.cohorteHorario}"
+                                             required="true">
+                                <p:ajax event="change" update="panel" listener="#{horariosController.cargarEventos()}"/>
+                                <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                                <f:selectItem itemLabel="1" itemValue="1" />
+                                <f:selectItem itemLabel="2" itemValue="2" />
+                                <f:selectItem itemLabel="3" itemValue="3" />
+                                <f:selectItem itemLabel="4" itemValue="4" />
+                                <f:selectItem itemLabel="5" itemValue="5" />
+                                <f:selectItem itemLabel="6" itemValue="6" />
+                                <f:selectItem itemLabel="7" itemValue="7" />
+                                <f:selectItem itemLabel="8" itemValue="8" />
+                                <f:selectItem itemLabel="9" itemValue="9" />
+                                <f:selectItem itemLabel="10" itemValue="10" />
+                                <f:selectItem itemLabel="11" itemValue="11" />
+                            </p:selectOneMenu>
+
+                        </h:panelGrid>
+
+                        <c:choose>
+                            <c:when test="#{horariosController.activarCalendario()}">
+                                <p:schedule id="schedule" widgetVar="myschedule" timeZone="GMT-5" locale="es"
+                                            view="agendaWeek" minTime="6:30am" rightHeaderTemplate=""
+                                            leftHeaderTemplate="" centerHeaderTemplate="" maxTime="10:30pm"
+                                            allDaySlot="false" columnFormat="dddd" initialDate="#{sesion.fechaInicial}"
+                                            value="#{horariosController.eventModel}">
+
+                                    <p:ajax event="dateSelect" listener="#{horariosController.onDateSelect}" update="eventDetails, :growl" onsuccess="funcion();" oncomplete="PF('eventDialog').show();funcion();" />
+                                    <p:ajax event="eventSelect" listener="#{horariosController.onEventSelect}" update=":form" oncomplete="PF('eventDialog').show();funcion();" />
+                                    <p:ajax event="eventMove" listener="#{horariosController.onEventMove}" update="eventDetails, :growl" />
+                                    <p:ajax event="eventResize" listener="#{horariosController.onEventResize}" update="eventDetails, :growl" />
+
+                                </p:schedule>
+                            </c:when>
+                            <c:otherwise>
+                                <p:schedule id="schedule" widgetVar="myschedule" timeZone="GMT-5" locale="es"
+                                            view="agendaWeek" minTime="6:30am" rightHeaderTemplate=""
+                                            leftHeaderTemplate="" centerHeaderTemplate="" maxTime="10:30pm"
+                                            allDaySlot="false" columnFormat="dddd" initialDate="#{sesion.fechaInicial}"
+                                            value="#{horariosController.eventModel}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </p:panel>
+                    <p:dialog id="registro" widgetVar="eventDialog" header="Registrar Horario" showEffect="clip" hideEffect="clip">
+
+                        <h:panelGrid id="eventDetails" columns="4">
+
+                            <p:outputLabel for="Asignatura" value="Asignatura" />
+                            <p:selectOneMenu id="Asignatura"
+                                             value="#{asignaturasController.selected}"
+                                             required="true"
+                                             filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                                <f:selectItems value="#{asignaturasController.consultaTabla}" var="asignatura" itemLabel="#{asignatura.codigoNombre}" itemValue="#{asignatura}"/>
+                            </p:selectOneMenu> 
+
+                            <p:outputLabel for="Docente" value="Docente" />
+                            <p:selectOneMenu id="Docente"
+                                             value="#{usuariosController.selected}"
+                                             required="true" filter="true"
+                                             filterMatchMode="contains">
+                                <p:ajax event="change" update="form:panel2" process="form:Docente" />
+                                <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                                <f:selectItems value="#{usuariosController.consultaDocentes}" var="usuario" itemLabel="#{usuario.loginNombre}" itemValue="#{usuario}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="grupo" value="Grupo"/>
+                            <p:selectOneMenu id="grupo"
+                                             value="#{horariosController.selected.grupoHorario}"
+                                             required="true">
+                                <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                                <f:selectItem itemLabel="50" itemValue="50" />
+                                <f:selectItem itemLabel="51" itemValue="51" />
+                                <f:selectItem itemLabel="52" itemValue="52" />
+                                <f:selectItem itemLabel="53" itemValue="53" />
+                                <f:selectItem itemLabel="54" itemValue="54" />
+                                <f:selectItem itemLabel="55" itemValue="55" />
+                                <f:selectItem itemLabel="56" itemValue="56" />
+                                <f:selectItem itemLabel="57" itemValue="57" />
+                                <f:selectItem itemLabel="58" itemValue="58" />
+                                <f:selectItem itemLabel="59" itemValue="59" />
+                                <f:selectItem itemLabel="60" itemValue="60" />
+                                <f:selectItem itemLabel="61" itemValue="61" />
+                                <f:selectItem itemLabel="62" itemValue="62" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="modalidad" value="Modalidad"/>
+                            <p:selectOneMenu id="modalidad"
+                                             value="#{modalidadesController.selected}"
+                                             required="true">
+                                <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                                <f:selectItems value="#{modalidadesController.consultaTabla}" var="modalidad" itemLabel="#{modalidad.descripcionModalidad}" itemValue="#{modalidad}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="inicio" value="Hora de Entrada:" />
+                            <p:calendar id="inicio" value="#{horariosController.event.startDate}"
+                                        locale="es" pattern="HH:mm" timeZone="GMT-5" timeOnly="true"
+                                        maxHour="22" minHour="7" stepMinute="30"
+                                        required="true"/>
+
+                            <p:outputLabel for="fin" value="Hora de Salida:" />
+                            <p:calendar id="fin" value="#{horariosController.event.endDate}"
+                                        locale="es" pattern="HH:mm" timeZone="GMT-5" timeOnly="true"
+                                        maxHour="22" minHour="7" stepMinute="30"
+                                        required="true"/>
+
+                            <p:outputLabel for="tipo" value="Tipo de Aula"/>
+                            <p:selectOneMenu id="tipo"
+                                             value="#{tipoAulaController.selected}"
+                                             required="true">
+                                <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                                <f:selectItems value="#{tipoAulaController.consultaTabla}" var="tipo" itemLabel="#{tipo.descripcionTipoAula}" itemValue="#{tipo}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="cupo" value="Cupos"/>
+                            <p:inputText id="cupo" 
+                                         value="#{horariosController.selected.cupos}" required="true">
+                                <f:validator validatorId="numeros"/>
+                            </p:inputText>
+
+                            <p:outputLabel for="aula" value="Aula"/>
+                            <p:selectOneMenu id="aula"
+                                             value="#{aulasController.selected}"
+                                             disabled="#{usuariosController.usuario.codigoPerfil.codigoPerfil!=1}">
+                                <f:selectItem itemLabel="Sin asignar" itemValue="" />
+                                <f:selectItems value="#{aulasController.consultaTabla}" var="aula" itemLabel="#{aula.descripcionAula} - #{aula.idSede.siglasSede}" itemValue="#{aula}"/>
+                            </p:selectOneMenu>
+
+                            <!-- boton -->
+                            <p:commandButton id="modalprueba" value="Ver hoja de vida Docente"  
+                                             oncomplete="PF('pruebaDialog').show();"/>
+
+                        </h:panelGrid>
+
+                        <div align="center" style="padding: 5px;">
+                            <h:panelGrid columns="2">
+                                <p:commandButton id="addButton" value="Guardar" 
+                                                 process=":form" 
+                                                 actionListener="#{horariosController.addEvent}" 
+                                                 onsuccess="PF('myschedule').update();PF('eventDialog').hide();" 
+                                                 update=":growl, :form, :form:panel"/>
+                                <c:if test="#{horariosController.selected.idHorario!=null}">
+                                    <p:commandButton id="delButton" value="Eliminar" 
+                                                     process=":form" 
+                                                     actionListener="#{horariosController.desactivar()}" 
+                                                     onsuccess="PF('myschedule').update();PF('eventDialog').hide();" 
+                                                     update=":growl"/>
+                                </c:if>
+                            </h:panelGrid>
+                        </div>
+                    </p:dialog>
+
+
+                    <!-- nuevo modal -->
+
+                    <p:dialog id="hojaVida" widgetVar="pruebaDialog" header="Hoja de vida" showEffect="clip" hideEffect="clip">
+                        <p:panel>
+                            <h:panelGrid columns="2" cellpadding="10" styleClass="noBorders"> 
+                                <p:panel id="panel2">
+                                    <h:panelGrid columns="4" cellpadding="10">  
+
+                                        <h:outputLabel for="documento" value="Documento de identidad:" />
+                                        <p:inputText id="login" style="width: 100%"
+                                                     value="#{usuariosController.selected.login}" required="true" readonly="true">
+                                            <f:validator validatorId="numeros"/>
+                                        </p:inputText>
+
+                                        <h:outputLabel for="nombres" value="Nombres:" />
+                                        <p:inputText id="nombre" style="width: 100%"
+                                                     value="#{usuariosController.selected.nombreUsuario}" required="true" readonly="true">
+                                            <f:validator validatorId="letras"/>
+                                        </p:inputText>
+
+                                        <h:outputLabel for="apellidos" value="Apellidos:" />
+                                        <p:inputText id="apellido" style="width: 100%"
+                                                     value="#{usuariosController.selected.apellidoUsuario}" required="true" readonly="true">
+                                            <f:validator validatorId="letras"/>
+                                        </p:inputText>
+
+                                    </h:panelGrid>
+                                    <p:panel>
+                                        <!-- Formulario y tabla de datos academicos-->
+                                        <ezcomp:datatable2 id="tablaMapa" controller="#{infoAcadeController}" 
+                                                           datos="#{infoAcadeController.consultaTabla}" 
+                                                           campoPrimario="nombre" 
+                                                           listaFiltro="#{infoAcadeController.filtro}" 
+                                                           titulo="Datos Hoja de vida" exporter="0"/>
+                                    </p:panel>
+                                </p:panel>
+                                <p:panel>
+                                    <p:graphicImage value="/resources/img/fotoUsuarios/#{usuariosController.selected.login}.jpg" width="200" height="220"/>
+                                </p:panel>
+
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel>
+                            <!-- Formulario y tabla de datos academicos-->
+                            <ezcomp:datatable2 id="tablaMapa2" controller="#{infoAcadeController}" 
+                                               datos="#{infoAcadeController.consultaTabla}" 
+                                               campoPrimario="nombre" 
+                                               listaFiltro="#{infoAcadeController.filtro}" 
+                                               titulo="Datos Hoja de vida" exporter="0"/>
+                        </p:panel>
+                    </p:dialog>
+
+                    <p:remoteCommand name="funcion" process="@this" actionListener="#{horariosController.activarDia()}" update="eventDetails"/>
+                    <p:remoteCommand name="reset" process="@this" actionListener="#{indexLoader.indexLoader()}"/>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

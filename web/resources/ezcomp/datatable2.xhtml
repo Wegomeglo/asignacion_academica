@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="controller" required="true"/>
+        <cc:attribute name="datos" required="true"/>
+        <cc:attribute name="listaFiltro" required="true" />
+        <cc:attribute name="campoPrimario" required="true" />
+        <cc:attribute name="titulo" required="true" />
+        <cc:attribute name="exporter" required="true" />
+        <cc:attribute name="buttons" default="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION --><!-- filteredValue="cc.attrs.controller.mapaRiegos" -->
+    <cc:implementation>
+        <p:dataTable id="tabla"  value="#{cc.attrs.datos}" var="item" widgetVar="tabla"
+                     paginator="true" rows="10" paginatorTemplate="{RowsPerPageDropdown} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} " rowsPerPageTemplate="5,10,15,20,30,50,100" 
+                     paginatorPosition="bottom"
+                     rowKey="#{item.cc.attrs.campoPrimario}"   
+                     filterEvent="enter" filteredValue="#{cc.attrs.listaFiltro}" emptyMessage="No se Encontraton Registros">
+            <f:facet name="header">  
+                #{cc.attrs.titulo}
+                <p:commandButton value="Limpiar Filtros" onclick="tabla.clearFilters();" onsuccess="tabla.clearFilters();"/>
+            </f:facet> 
+            
+            <!-- Columna de la Tabla que representa la informacion retornada -->
+            
+            <p:columns value="#{cc.attrs.controller.columns}" var="column" columnIndexVar="colIndex"   
+                       sortBy="#{item[column.property]}" filterBy="#{item[column.property]}" filterMatchMode="contains">
+                <f:facet name="header">  
+                    <p:outputLabel value="#{column.header}"/>
+                </f:facet>  
+
+                <p:outputLabel value="#{item[column.property]}"/>
+            </p:columns>
+            
+            <!-- Columna de la Tabla que representa las acciones a realizar -->
+            
+           <!--  <c:if test="#{cc.attrs.buttons}">
+                <p:column headerText="Acciones" style="width:6%" exportable="false">  
+                    <h:panelGrid columns="2" border="0" rules="all">
+                        <p:commandButton global="true" id="BModificar"  icon="ui-icon-pencil" title="Modificar" process="tabla" action="#{cc.attrs.controller.prepararEdicion()}" update="#{cc.attrs.refresh}">
+                            <f:setPropertyActionListener value="#{item}" target="#{cc.attrs.controller.primaryKey}"  />  
+                        </p:commandButton>
+                        <p:commandButton global="true" id="Beliminar" process="@this" icon="ui-icon-trash" title="Eliminar" onclick="diaEliminar.show();">  
+                            <f:setPropertyActionListener value="#{item}" target="#{cc.attrs.controller.primaryKey}"  />
+                        </p:commandButton> 
+                    </h:panelGrid>
+                </p:column> 
+            </c:if>-->
+        </p:dataTable>
+        <h:commandLink>
+            <p:graphicImage value="/resources/img/excel.png" />
+            <p:dataExporter type="xls" target="tabla" fileName="#{cc.attrs.titulo}" />
+        </h:commandLink>
+        <h:commandLink actionListener="#{reportes.pdfCruds(cc.attrs.exporter)}">
+            <p:graphicImage value="/resources/img/pdf.png" />
+        </h:commandLink>
+        <p:confirmDialog id="eliminarDialog" message="¿Desea Eliminar el Registro Seleccionado?"  
+                         header="Confirmar Acción" closable="false" severity="alert" widgetVar="diaEliminar" appendTo="@(body)">
+
+            <p:commandButton id="confirm" update="#{cc.attrs.refresh}" value="Si" onstart="tabla.clearFilters();" oncomplete="tabla.clearFilters();" onsuccess="diaEliminar.hide();"  icon="ui-icon-check" actionListener="#{cc.attrs.controller.desactivar}"  process="@this"/>
+            <p:commandButton id="decline" value="No" onclick="diaEliminar.hide();" type="button" icon="ui-icon-cancel"/>   
+
+        </p:confirmDialog>
+    </cc:implementation>
+</html>

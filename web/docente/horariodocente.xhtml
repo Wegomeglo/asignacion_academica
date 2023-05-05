@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="title">
+                Horario de las Aulas:SAD
+            </ui:define>
+
+            <ui:define name="onload">
+                <script language="JavaScript" type="text/JavaScript">
+                    function bodyLoaded(){
+                    reset();
+                    }
+                </script>
+            </ui:define>
+
+            <ui:define name="migas">
+                <p:menuitem styleClass="migas" value="Registro de Informacion" url="#"/>
+                <p:menuitem styleClass="migas" value="Registro de Horarios" url="#"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <p:panel id="panel" header="Control de Horarios">
+
+                        <h:panelGrid columns="2" styleClass="noBorders">
+                            <h:commandLink actionListener="#{reportes.pdfCruds(2)}">
+                                <p:graphicImage value="/resources/img/pdf.png" />
+                            </h:commandLink>
+                        </h:panelGrid>
+
+                        <!-- Generación del Calendario de asignturas de cada docente -->
+                        
+                        <p:schedule id="schedule" widgetVar="myschedule" timeZone="GMT-5" locale="es"
+                                    view="agendaWeek" minTime="6:30am" rightHeaderTemplate=""
+                                    leftHeaderTemplate="" centerHeaderTemplate="" maxTime="10:30pm"
+                                    allDaySlot="false" columnFormat="dddd" initialDate="#{sesion.fechaInicial}"
+                                    value="#{horariosController.eventModel}"/>
+                    </p:panel>
+                    <p:remoteCommand name="funcion" process="@this" actionListener="#{horariosController.activarDia()}"/>
+                    <p:remoteCommand name="reset" process="@this" actionListener="#{indexLoader.indexLoader()}"/>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

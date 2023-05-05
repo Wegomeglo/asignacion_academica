@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:messages id="messages" showDetail="true"/>
+        <p:panel id="panel">
+            <h:panelGrid columns="2" cellpadding="12">  
+                <p:outputLabel for="año" value="Año: "/>
+                <p:selectOneMenu id="año"
+                                 value="#{periodosController.selected.año}"
+                                 required="true"
+                                 >
+                    <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                    <f:selectItem itemLabel="2023" itemValue="2023" />
+                    <f:selectItem itemLabel="2024" itemValue="2024" />
+                    <f:selectItem itemLabel="2025" itemValue="2025" />
+                    <f:selectItem itemLabel="2026" itemValue="2026" />
+                    <f:selectItem itemLabel="2027" itemValue="2027" />
+                    <f:selectItem itemLabel="2028" itemValue="2028" />
+                    <f:selectItem itemLabel="2029" itemValue="2029" />
+                    <f:selectItem itemLabel="2030" itemValue="2030" />
+                    <f:selectItem itemLabel="2031" itemValue="2031" />
+                    <f:selectItem itemLabel="2032" itemValue="2032" />
+
+                </p:selectOneMenu>
+
+
+                <p:outputLabel for="periodo" value="Periodo: "/>
+                <p:selectOneMenu id="periodo"
+                                 value="#{periodosController.selected.periodo}"
+                                 required="true">
+                    <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                    <f:selectItem itemLabel="A" itemValue="A" />
+                    <f:selectItem itemLabel="B" itemValue="B" />
+
+                </p:selectOneMenu>
+
+                <p:outputLabel for="nombreperiodo" value="Nombre Periodo:" />
+                <p:inputText id="nombreperiodo" style="width: 100%"
+                             value="#{periodosController.selected.nombrePeriodo}" required="true" >
+                    <f:validator validatorId="letrasnumeros"/>
+
+                </p:inputText>
+
+
+            </h:panelGrid>
+
+            <c:choose> 
+                <c:when test="#{periodosController.selected.nombrePeriodo==null}">
+                    <p:commandButton value="Guardar Periodo" 
+                                     actionListener="#{periodosController.create()}"
+                                     process="panel" update=":tabview"
+                                     oncomplete="funcion();" onsuccess="tabla.clearFilters();"/>
+                </c:when>
+
+                <!-- Creacion de Tabla -->
+                <c:otherwise>
+                    <p:commandButton value="Actualizar Periodo" 
+                                     actionListener="#{periodosController.update()}" 
+                                     process="panel" update=":tabview"
+                                     oncomplete="funcion();limpiar();" onsuccess="tabla.clearFilters();"/>
+                </c:otherwise>
+            </c:choose>
+            <p:remoteCommand name="funcion" process="@this" 
+                             onstart="tabla.clearFilters();"/>
+
+        </p:panel>
+
+
+    </cc:implementation>
+</html>
