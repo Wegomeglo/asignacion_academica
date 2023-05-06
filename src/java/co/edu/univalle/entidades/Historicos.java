@@ -66,9 +66,6 @@ public class Historicos implements Serializable {
     @ManyToOne(optional = false)
     private Estados idEstado;
     
-    
-    
-
     public Historicos() {
     }
 
@@ -76,17 +73,27 @@ public class Historicos implements Serializable {
         this.idHistorico = idHistorico;
     }
 
-    public Historicos(Integer idHistorico, int cohorteHistorico, int grupoHistorico, String intensidadHistorico, String diaHistorico, String hEntradaHistorico, String hSalidaHistorico, int anioHistorico, String periodoHistorico) {
+    public Historicos(Integer idHistorico, int cohorteHistorico, int grupoHistorico, Integer cupos, String intensidadHistorico, String diaHistorico, String hEntradaHistorico, String hSalidaHistorico, int anioHistorico, String periodoHistorico, Planes idPlan, Usuarios loginUsuario, Asignaturas codigoAsignatura, TipoAula idTipoAula, Aulas idAula, Modalidades idModalidad, Estados idEstado) {
         this.idHistorico = idHistorico;
         this.cohorteHistorico = cohorteHistorico;
         this.grupoHistorico = grupoHistorico;
+        this.cupos = cupos;
         this.intensidadHistorico = intensidadHistorico;
         this.diaHistorico = diaHistorico;
         this.hEntradaHistorico = hEntradaHistorico;
         this.hSalidaHistorico = hSalidaHistorico;
         this.anioHistorico = anioHistorico;
         this.periodoHistorico = periodoHistorico;
+        this.idPlan = idPlan;
+        this.loginUsuario = loginUsuario;
+        this.codigoAsignatura = codigoAsignatura;
+        this.idTipoAula = idTipoAula;
+        this.idAula = idAula;
+        this.idModalidad = idModalidad;
+        this.idEstado = idEstado;
     }
+
+
 
     public Integer getIdHistorico() {
         return idHistorico;

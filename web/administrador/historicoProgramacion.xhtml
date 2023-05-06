@@ -27,39 +27,39 @@
             <ui:define name="content">
                 <p:panel id="panel" header="Históricos de Programaciones">
                     <h:panelGrid columns="2">
-                    <p:outputLabel for="año" value="Año: "/>
-                    <p:selectOneMenu id="año"
-                                     value="#{periodosController.selected}"
-                                     filter="true"
-                                     filterMatchMode="contains"
-                                     required="true">
-                        <p:ajax event="change" update="panelTabla" process="form" />
-                        <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                        <p:outputLabel for="año" value="Año: "/>
+                        <p:selectOneMenu id="año"
+                                         value="#{periodosController.selected}"
+                                         filter="true"
+                                         filterMatchMode="contains"
+                                         required="true">
+                            <p:ajax event="change" update="panelTabla" process="form" />
+                            <f:selectItem itemLabel="--Seleccione--" itemValue="" />
 
-                        <f:selectItems value="#{periodosController.consultaAñosInactivos}" />
-                    </p:selectOneMenu>
-                    
-                    <p:outputLabel for="periodo" value="Periodo: "/>
-                    <p:selectOneMenu id="periodo"
-                                     value="#{periodosController.selected}"
-                                     filter="true"
-                                     filterMatchMode="contains"
-                                     required="true">
-                        <p:ajax event="change" update="panelTabla" process="form" />
-                        <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+                            <f:selectItems value="#{periodosController.consultaAñosInactivos}" />
+                        </p:selectOneMenu>
 
-                        <f:selectItems value="#{periodosController.consultaPeriodosInactivos}" />
-                    </p:selectOneMenu>
+                        <p:outputLabel for="periodo" value="Periodo: "/>
+                        <p:selectOneMenu id="periodo"
+                                         value="#{periodosController.selected}"
+                                         filter="true"
+                                         filterMatchMode="contains"
+                                         required="true">
+                            <p:ajax event="change" update="panelTabla" process="form" />
+                            <f:selectItem itemLabel="--Seleccione--" itemValue="" />
+
+                            <f:selectItems value="#{periodosController.consultaPeriodosInactivos}" />
+                        </p:selectOneMenu>
 
 
-</h:panelGrid>
+                    </h:panelGrid>
                 </p:panel>
                 <p:panel id="panelTabla">
                     <h:form id="form">
-                        <ezcomp:datatable id="tablaMapa" controller="#{horariosController}" 
-                                          datos="#{horariosController.consultaTabla}" 
+                        <ezcomp:datatable id="tablaMapa" controller="#{historicosController}" 
+                                          datos="#{historicosController.consultaTablaHistorico}" 
                                           campoPrimario="nombre" 
-                                          listaFiltro="#{horariosController.filtro}" 
+                                          listaFiltro="#{historicosController.filtro}" 
                                           titulo="Horario General" exporter="1" refresh=":form" buttons="false"/>
                     </h:form>
                 </p:panel>

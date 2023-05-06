@@ -2,6 +2,7 @@ package co.edu.univalle.controladores;
 
 import co.edu.univalle.controladores.util.JsfUtil;
 import co.edu.univalle.entidades.Asignaturas;
+import co.edu.univalle.entidades.Historicos;
 import co.edu.univalle.entidades.Horarios;
 import co.edu.univalle.entidades.Usuarios;
 import java.io.Serializable;
@@ -62,6 +63,7 @@ public class HorariosController extends Controller implements Serializable {
     private ScheduleModel eventModel = new DefaultScheduleModel();
     private DefaultScheduleEvent event = new DefaultScheduleEvent();
     private List<Horarios> consultaTabla;
+    private List<Historicos> consultaTablaH;
     private List<Horarios> filtro;
 
     public HorariosController() {
