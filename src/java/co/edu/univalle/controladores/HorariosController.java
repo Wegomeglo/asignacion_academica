@@ -65,7 +65,7 @@ public class HorariosController extends Controller implements Serializable {
     private List<Horarios> filtro;
 
     public HorariosController() {
-        setColumnTemplate("año periodo sem plan codigo_asignatura grupo dia hora_entrada hora_salida sede salon nombre_asignatura nombre_docente");
+        setColumnTemplate("año periodo semestre plan codigo_asignatura grupo dia hora_entrada hora_salida sede salon nombre_asignatura nombre_docente");
         createDynamicColumns();
     }
 

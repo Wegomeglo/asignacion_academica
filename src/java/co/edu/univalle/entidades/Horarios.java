@@ -78,7 +78,7 @@ public class Horarios implements Serializable {
     @ManyToOne(optional = false)
     private Usuarios loginUsuario;
     @Transient
-    private String sem;
+    private String semestre;
     @Transient
     private String codigo_asignatura;
     @Transient
@@ -107,7 +107,7 @@ public class Horarios implements Serializable {
         this.idHorario = idHorario;
     }
 
-    public Horarios(Integer idHorario, int cohorteHorario, int grupoHorario, Integer cupos, String intensidadHorario, String diaHorario, String hEntradaHorario, String hSalidaHorario, String año, String periodo, Asignaturas codigoAsignatura, TipoAula idTipoAula, Aulas idAula, Estados idEstado, Modalidades idModalidad, Planes idPlan, Usuarios loginUsuario, String sem, String codigo_asignatura, String grupo, String dia, String hora_entrada, String hora_salida, String sede, String salon, String nombre_asignatura, String usuario, String plan) {
+    public Horarios(Integer idHorario, int cohorteHorario, int grupoHorario, Integer cupos, String intensidadHorario, String diaHorario, String hEntradaHorario, String hSalidaHorario, String año, String periodo, Asignaturas codigoAsignatura, TipoAula idTipoAula, Aulas idAula, Estados idEstado, Modalidades idModalidad, Planes idPlan, Usuarios loginUsuario, String semestre, String codigo_asignatura, String grupo, String dia, String hora_entrada, String hora_salida, String sede, String salon, String nombre_asignatura, String usuario, String plan) {
         this.idHorario = idHorario;
         this.cohorteHorario = cohorteHorario;
         this.grupoHorario = grupoHorario;
@@ -125,7 +125,7 @@ public class Horarios implements Serializable {
         this.idModalidad = idModalidad;
         this.idPlan = idPlan;
         this.loginUsuario = loginUsuario;
-        this.sem = sem;
+        this.semestre = semestre;
         this.codigo_asignatura = codigo_asignatura;
         this.grupo = grupo;
         this.dia = dia;
@@ -138,6 +138,7 @@ public class Horarios implements Serializable {
         this.plan = plan;
     }
 
+ 
     
 
     public Integer getIdHorario() {
@@ -285,13 +286,13 @@ public class Horarios implements Serializable {
         this.cupos = cupos;
     }
 
-    public String getSem() {
-        sem = "" + cohorteHorario;
-        return sem;
+    public String getSemestre() {
+        semestre = "" + cohorteHorario;
+        return semestre;
     }
 
-    public void setSem(String sem) {
-        this.sem = sem;
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 
     public String getCodigo_asignatura() {

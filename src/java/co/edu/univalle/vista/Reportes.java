@@ -168,7 +168,7 @@ public class Reportes {
 
     public Document reporteHorarioAsignaturaDocente() {
         try {
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA");
+            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - ");
             document = reporteEncabezado("PERIODO ACADÉMICO AGOSTO - DICIEMBRE 2018");
             document = reporteEncabezado("HORARIO DOCENTE");
             if ("4".equals(getUsuariosController().getUsuario().getCodigoPerfil().getCodigoPerfil())
@@ -473,7 +473,7 @@ public class Reportes {
     public PdfPTable reporteLlenarTablaHorarios(List<Horarios> consulta) {
         for (Horarios m : consulta) {
 
-            PdfPCell celda =  new PdfPCell(new Phrase("" + m.getSem(), FontFactory.getFont(ARIAL, 10)));
+            PdfPCell celda =  new PdfPCell(new Phrase("" + m.getSemestre(), FontFactory.getFont(ARIAL, 10)));
             celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
 
