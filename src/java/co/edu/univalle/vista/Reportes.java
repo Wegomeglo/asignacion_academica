@@ -168,8 +168,8 @@ public class Reportes {
 
     public Document reporteHorarioAsignaturaDocente() {
         try {
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - ");
-            document = reporteEncabezado("PERIODO ACADÉMICO AGOSTO - DICIEMBRE 2018");
+            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA");
+            document = reporteEncabezado("PERIODO ACADÉMICO - " + Periodo + " " + Año);
             document = reporteEncabezado("HORARIO DOCENTE");
             if ("4".equals(getUsuariosController().getUsuario().getCodigoPerfil().getCodigoPerfil())
                     || "5".equals(getUsuariosController().getUsuario().getCodigoPerfil().getCodigoPerfil())) {
@@ -190,8 +190,8 @@ public class Reportes {
 
     public Document reporteHorarioPlan() {
         try {
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA");
-            document = reporteEncabezado("PERIODO ACADÉMICO AGOSTO - DICIEMBRE 2018");
+            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA");
+            document = reporteEncabezado("PERIODO ACADÉMICO - " + Periodo + " " + Año);
             String programa = "";
             if ("3".equals(getUsuariosController().getUsuario().getCodigoPerfil().getCodigoPerfil())) {
                 programa = getUsuariosController().getUsuario().getIdPlan().getIdPlan() + " - "
@@ -215,8 +215,7 @@ public class Reportes {
 
     public Document reporteHorarioGeneral() {
         try {
-
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA");
+            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA");
             document = reporteEncabezado("PERIODO ACADÉMICO - " + Periodo + " " + Año);
             document = reporteEncabezado("HORARIO GENERAL");
             document = reporteEncabezado(" ");
@@ -232,8 +231,8 @@ public class Reportes {
 
     public Document reporteHorarioCohorte() {
         try {
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA");
-            document = reporteEncabezado("PERIODO ACADÉMICO AGOSTO - DICIEMBRE 2018");
+            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA");
+            document = reporteEncabezado("PERIODO ACADÉMICO - " + Periodo + " " + Año);
             String programa = "";
             if ("3".equals(getUsuariosController().getUsuario().getCodigoPerfil().getCodigoPerfil())) {
                 programa = getUsuariosController().getUsuario().getIdPlan().getIdPlan() + " - "
@@ -273,8 +272,8 @@ public class Reportes {
         tabla.setWidthPercentage(100);
         int tamaño[] = {2};
         ArrayList<String> nombres = new ArrayList<>();
-     //   nombres.add("Año");
-       // nombres.add("Periodo");
+        //   nombres.add("Año");
+        // nombres.add("Periodo");
         nombres.add("Sem");
         nombres.add("Plán");
         nombres.add("Código Asignatura");
@@ -343,7 +342,7 @@ public class Reportes {
         celda.setColspan(4);
         celda.setHorizontalAlignment(Element.ALIGN_CENTER);
         tabla.addCell(celda);
-        celda = new PdfPCell(new Phrase("FEBRERO - JUNIO 2017", FontFactory.getFont(ARIAL, 10)));
+        celda = new PdfPCell(new Phrase(Periodo + " " + Año, FontFactory.getFont(ARIAL, 10)));
         celda.setColspan(5);
         celda.setHorizontalAlignment(Element.ALIGN_CENTER);
         tabla.addCell(celda);
@@ -473,7 +472,7 @@ public class Reportes {
     public PdfPTable reporteLlenarTablaHorarios(List<Horarios> consulta) {
         for (Horarios m : consulta) {
 
-            PdfPCell celda =  new PdfPCell(new Phrase("" + m.getSemestre(), FontFactory.getFont(ARIAL, 10)));
+            PdfPCell celda = new PdfPCell(new Phrase("" + m.getSemestre(), FontFactory.getFont(ARIAL, 10)));
             celda.setHorizontalAlignment(Element.ALIGN_CENTER);
             tabla.addCell(celda);
 

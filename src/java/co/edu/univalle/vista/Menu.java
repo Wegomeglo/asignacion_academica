@@ -65,7 +65,7 @@ public class Menu implements Serializable {
         if ("1".equals(perfil)
                 || "2".equals(perfil)
                 || "3".equals(perfil)) {
-            submenu.addElement(crearItem("Generar Reportes", "/secretario/reportes.xhtml"));
+            submenu.addElement(crearItem("Generar Reportes", "/secretario/reportesActuales.xhtml"));
             if ("1".equals(perfil)) {
                 submenu.addElement(crearItem("Optimizar Salones", "/administrador/optimizacion.xhtml"));
             }
