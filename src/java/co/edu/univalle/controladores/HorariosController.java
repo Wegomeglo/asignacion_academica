@@ -86,6 +86,8 @@ public class HorariosController extends Controller implements Serializable {
         }
         return consultaTabla;
     }
+    
+    
 
     public List<Horarios> getConsultaHorariosCohorte() {
         try {
@@ -164,6 +166,19 @@ public class HorariosController extends Controller implements Serializable {
             Query query;
             query = getJpaController().getEntityManager().createQuery("SELECT h FROM Horarios h WHERE h.idEstado=:ESTADO ORDER BY h.idPlan.idPlan, h.cohorteHorario, h.loginUsuario.nombreUsuario, h.loginUsuario.apellidoUsuario");
             query.setParameter("ESTADO", ACTIVO);
+            consultaTabla = query.getResultList();
+        } catch (NullPointerException npe) {
+            JsfUtil.addErrorMessage(npe, CONSULTA);
+        }
+        return consultaTabla;
+    }
+    
+    public List<Horarios> getConsultaTablaHistorico() {
+        try {
+            Query query;
+            query = getJpaController().getEntityManager().createQuery("SELECT h FROM Horarios h WHERE h.idEstado=:ESTADO ORDER BY h.idPlan.idPlan, h.cohorteHorario, h.loginUsuario.nombreUsuario, h.loginUsuario.apellidoUsuario");
+            query.setParameter("ESTADO", ACTIVO);
+            query.setParameter("DOCENTE", getUsuariosController().getSelected());
             consultaTabla = query.getResultList();
         } catch (NullPointerException npe) {
             JsfUtil.addErrorMessage(npe, CONSULTA);

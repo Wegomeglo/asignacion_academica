@@ -51,6 +51,7 @@ public class Reportes {
     @ManagedProperty("#{periodosController}")
     private PeriodosController periodoController = new PeriodosController();
 
+    String TituloInforme = "UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA";
     String Periodo = periodoController.getConsultaTabla().get(0).getNombrePeriodo();
     String Año = periodoController.getConsultaTabla().get(0).getAño();
 
@@ -168,7 +169,7 @@ public class Reportes {
 
     public Document reporteHorarioAsignaturaDocente() {
         try {
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA");
+            document = reporteEncabezado(TituloInforme);
             document = reporteEncabezado("PERIODO ACADÉMICO - " + Periodo + " " + Año);
             document = reporteEncabezado("HORARIO DOCENTE");
             if ("4".equals(getUsuariosController().getUsuario().getCodigoPerfil().getCodigoPerfil())
@@ -190,7 +191,7 @@ public class Reportes {
 
     public Document reporteHorarioPlan() {
         try {
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA");
+            document = reporteEncabezado(TituloInforme);
             document = reporteEncabezado("PERIODO ACADÉMICO - " + Periodo + " " + Año);
             String programa = "";
             if ("3".equals(getUsuariosController().getUsuario().getCodigoPerfil().getCodigoPerfil())) {
@@ -215,7 +216,7 @@ public class Reportes {
 
     public Document reporteHorarioGeneral() {
         try {
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA");
+            document = reporteEncabezado(TituloInforme);
             document = reporteEncabezado("PERIODO ACADÉMICO - " + Periodo + " " + Año);
             document = reporteEncabezado("HORARIO GENERAL");
             document = reporteEncabezado(" ");
@@ -231,7 +232,7 @@ public class Reportes {
 
     public Document reporteHorarioCohorte() {
         try {
-            document = reporteEncabezado("UNIVERSIDAD DEL VALLE SEDE CAICEDONIA - NODO SEVILLA");
+            document = reporteEncabezado(TituloInforme);
             document = reporteEncabezado("PERIODO ACADÉMICO - " + Periodo + " " + Año);
             String programa = "";
             if ("3".equals(getUsuariosController().getUsuario().getCodigoPerfil().getCodigoPerfil())) {

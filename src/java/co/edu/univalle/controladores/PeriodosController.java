@@ -72,6 +72,30 @@ public class PeriodosController extends Controller implements Serializable {
         return consultaTabla;
     }
 
+    public List<Periodos> getConsultaAñosInactivos() {
+        try {
+            Query query;
+            query = getJpaController().getEntityManager().createQuery("SELECT DISTINCT p.año FROM Periodos p WHERE p.idEstado=:ESTADO ORDER BY p.año");
+            query.setParameter("ESTADO", DESACTIVADO);
+            consultaTabla = query.getResultList();
+        } catch (NullPointerException npe) {
+            JsfUtil.addErrorMessage(npe, CONSULTA);
+        }
+        return consultaTabla;
+    }
+    
+     public List<Periodos> getConsultaPeriodosInactivos() {
+        try {
+            Query query;
+            query = getJpaController().getEntityManager().createQuery("SELECT DISTINCT p.periodo FROM Periodos p WHERE p.idEstado=:ESTADO ORDER BY p.año");
+            query.setParameter("ESTADO", DESACTIVADO);
+            consultaTabla = query.getResultList();
+        } catch (NullPointerException npe) {
+            JsfUtil.addErrorMessage(npe, CONSULTA);
+        }
+        return consultaTabla;
+    }
+    
     public void update() {
         createOrUpdate(UPDATE);
     }
