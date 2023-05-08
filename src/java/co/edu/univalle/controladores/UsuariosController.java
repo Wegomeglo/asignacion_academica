@@ -81,7 +81,7 @@ public class UsuariosController extends Controller implements Serializable {
         this.imageTemp = null;
     }
 
-    private String destination = "/Users/andresangel/GD - Andrés Ángel/Docencia/2023-1/2711/750057M - Práctica Profesional/asignacion_academica/web/resources/img/fotoUsuarios/";
+    private String destination = "/Users/andresangel/NetBeansProjects/asignacion_academica/web/resources/img/fotoUsuarios/";
 
     public void upload(FileUploadEvent event) {
         try {

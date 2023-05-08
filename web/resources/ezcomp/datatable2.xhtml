@@ -24,10 +24,10 @@
                      paginator="true" rows="10" paginatorTemplate="{RowsPerPageDropdown} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} " rowsPerPageTemplate="5,10,15,20,30,50,100" 
                      paginatorPosition="bottom"
                      rowKey="#{item.cc.attrs.campoPrimario}"   
-                     filterEvent="enter" filteredValue="#{cc.attrs.listaFiltro}" emptyMessage="No se Encontraton Registros">
+                      emptyMessage="No se Encontraton Registros">
             <f:facet name="header">  
                 #{cc.attrs.titulo}
-                <p:commandButton value="Limpiar Filtros" onclick="tabla.clearFilters();" onsuccess="tabla.clearFilters();"/>
+               <!-- <p:commandButton value="Limpiar Filtros" onclick="tabla.clearFilters();" onsuccess="tabla.clearFilters();"/>-->
             </f:facet> 
             
             <!-- Columna de la Tabla que representa la informacion retornada -->
