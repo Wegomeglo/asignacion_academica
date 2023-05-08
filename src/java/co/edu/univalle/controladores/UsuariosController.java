@@ -82,6 +82,7 @@ public class UsuariosController extends Controller implements Serializable {
     }
 
     private String destination = "/Users/andresangel/NetBeansProjects/asignacion_academica/web/resources/img/fotoUsuarios/";
+  //private String destination = "D:/Escritorio/versiones Sad/GITHUB/asignacion_academica/web/resources/img/fotoUsuarios/";
 
     public void upload(FileUploadEvent event) {
         try {
