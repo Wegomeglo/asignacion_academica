@@ -24,14 +24,14 @@
                      paginator="true" rows="10" paginatorTemplate="{RowsPerPageDropdown} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} " rowsPerPageTemplate="5,10,15,20,30,50,100" 
                      paginatorPosition="bottom"
                      rowKey="#{item.cc.attrs.campoPrimario}"   
-                      emptyMessage="No se Encontraton Registros">
+                     emptyMessage="No se Encontraton Registros">
             <f:facet name="header">  
                 #{cc.attrs.titulo}
-               <!-- <p:commandButton value="Limpiar Filtros" onclick="tabla.clearFilters();" onsuccess="tabla.clearFilters();"/>-->
+                <!-- <p:commandButton value="Limpiar Filtros" onclick="tabla.clearFilters();" onsuccess="tabla.clearFilters();"/>-->
             </f:facet> 
-            
+
             <!-- Columna de la Tabla que representa la informacion retornada -->
-            
+
             <p:columns value="#{cc.attrs.controller.columns}" var="column" columnIndexVar="colIndex"   
                        sortBy="#{item[column.property]}" filterBy="#{item[column.property]}" filterMatchMode="contains">
                 <f:facet name="header">  
@@ -40,28 +40,28 @@
 
                 <p:outputLabel value="#{item[column.property]}"/>
             </p:columns>
-            
+
             <!-- Columna de la Tabla que representa las acciones a realizar -->
-            
-           <!--  <c:if test="#{cc.attrs.buttons}">
-                <p:column headerText="Acciones" style="width:6%" exportable="false">  
-                    <h:panelGrid columns="2" border="0" rules="all">
-                        <p:commandButton global="true" id="BModificar"  icon="ui-icon-pencil" title="Modificar" process="tabla" action="#{cc.attrs.controller.prepararEdicion()}" update="#{cc.attrs.refresh}">
-                            <f:setPropertyActionListener value="#{item}" target="#{cc.attrs.controller.primaryKey}"  />  
-                        </p:commandButton>
-                        <p:commandButton global="true" id="Beliminar" process="@this" icon="ui-icon-trash" title="Eliminar" onclick="diaEliminar.show();">  
-                            <f:setPropertyActionListener value="#{item}" target="#{cc.attrs.controller.primaryKey}"  />
-                        </p:commandButton> 
-                    </h:panelGrid>
-                </p:column> 
-            </c:if>-->
+
+<!--  <c:if test="#{cc.attrs.buttons}">
+    <p:column headerText="Acciones" style="width:6%" exportable="false">  
+        <h:panelGrid columns="2" border="0" rules="all">
+            <p:commandButton global="true" id="BModificar"  icon="ui-icon-pencil" title="Modificar" process="tabla" action="#{cc.attrs.controller.prepararEdicion()}" update="#{cc.attrs.refresh}">
+                <f:setPropertyActionListener value="#{item}" target="#{cc.attrs.controller.primaryKey}"  />  
+            </p:commandButton>
+            <p:commandButton global="true" id="Beliminar" process="@this" icon="ui-icon-trash" title="Eliminar" onclick="diaEliminar.show();">  
+                <f:setPropertyActionListener value="#{item}" target="#{cc.attrs.controller.primaryKey}"  />
+            </p:commandButton> 
+        </h:panelGrid>
+    </p:column> 
+</c:if>-->
         </p:dataTable>
         <h:commandLink>
-            <p:graphicImage value="/resources/img/excel.png" />
+            <!--<p:graphicImage value="/resources/img/excel.png" />-->
             <p:dataExporter type="xls" target="tabla" fileName="#{cc.attrs.titulo}" />
         </h:commandLink>
         <h:commandLink actionListener="#{reportes.pdfCruds(cc.attrs.exporter)}">
-            <p:graphicImage value="/resources/img/pdf.png" />
+            <!--       <p:graphicImage value="/resources/img/pdf.png" />-->
         </h:commandLink>
         <p:confirmDialog id="eliminarDialog" message="¿Desea Eliminar el Registro Seleccionado?"  
                          header="Confirmar Acción" closable="false" severity="alert" widgetVar="diaEliminar" appendTo="@(body)">
