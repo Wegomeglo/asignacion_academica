@@ -81,6 +81,13 @@ public class Acordeon implements Serializable {
             } else {
                 tituloFormulario = "Actualizar Aula";
             }
+        } else if ("/administrador/registroperfiles.xhtml".equals(value)) {
+            tituloTabla = "Consultar Perfil";
+            if (getAulasController().getSelected().getIdAula() == null) {
+                tituloFormulario = "Guardar Perfil";
+            } else {
+                tituloFormulario = "Actualizar Perfil";
+            }
         } else if ("/administrador/registrotipoaula.xhtml".equals(value)) {
             tituloTabla = "Consultar Tipos de Aula";
             if (getTipoAulaController().getSelected().getIdTipoAula() == null) {
@@ -97,7 +104,7 @@ public class Acordeon implements Serializable {
             }
         } else if ("/administrador/registroperiodos.xhtml".equals(value)) {
             tituloTabla = "Consultar Periodos";
-            if (""+getPeriodosController().getSelected().getIdPeriodo() == null) {
+            if ("" + getPeriodosController().getSelected().getIdPeriodo() == null) {
                 tituloFormulario = "Actualizar Periodo";
             } else {
                 tituloFormulario = "Guardar Periodo";
@@ -242,7 +249,5 @@ public class Acordeon implements Serializable {
     public void setPeriodosController(PeriodosController periodosController) {
         this.periodosController = periodosController;
     }
-    
-    
 
 }

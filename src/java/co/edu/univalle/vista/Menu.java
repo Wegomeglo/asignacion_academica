@@ -46,6 +46,8 @@ public class Menu implements Serializable {
                 submenu.addElement(crearItem("Registrar Periodos", "/administrador/registroperiodos.xhtml"));
 
                 submenu.addElement(crearItem("Registrar Aulas", "/administrador/registroaulas.xhtml"));
+                
+                submenu.addElement(crearItem("Registrar Perfiles", "/administrador/registroperfiles.xhtml"));
 
                 submenu.addElement(crearItem("Registrar Tipos de Aulas", "/administrador/registrotipoaula.xhtml"));
 
